@@ -6,3 +6,7 @@ a.option {
   text-decoration: none;
   color: #000;
 }
+
+* {
+  box-sizing: border-box;
+}
