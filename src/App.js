@@ -27,7 +27,6 @@ class App extends React.Component {
               ...snapShot.data()
             }
           });
-          console.log(this.state);
         });
         // const snapShot = await userRef.get();
         // this.setState({
