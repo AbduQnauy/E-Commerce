@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import CollectionOverviewContainer from "../../components/collections-overview/collections-overview.container";
@@ -8,17 +8,17 @@ import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 // const CollectionsOverViewWithSpinner = WithSpinner(CollectionsOverView);
 // const CollectionsPageWithSpinner = WithSpinner(CollectionPage);
 
-class shopPage extends React.Component {
-  componentDidMount() {
-    const { fetchCollectionsStart } = this.props;
+const ShopPage = ({ fetchCollectionsStart, match }) => {
+  // componentDidMount() {
+  //   const { fetchCollectionsStart } = this.props;
+  //   fetchCollectionsStart();
+  // }
+  useEffect(() => {
     fetchCollectionsStart();
-  }
-
-  render() {
-    const { match } = this.props;
-    return (
-      <div className="shop-page">
-        {/* <Route
+  }, [fetchCollectionsStart]);
+  return (
+    <div className="shop-page">
+      {/* <Route
           exact
           path={`${match.path}`}
           // render={() => <CollectionsOverViewWithSpinner isLoading={loading} />}
@@ -29,13 +29,13 @@ class shopPage extends React.Component {
             })
           }
         /> */}
-        <Route
-          exact
-          path={`${match.path}`}
-          component={CollectionOverviewContainer}
-        />
+      <Route
+        exact
+        path={`${match.path}`}
+        component={CollectionOverviewContainer}
+      />
 
-        {/* <Route
+      {/* <Route
           path={`${match.path}/:collectionId`}
           render={props =>
             // <CollectionsPageWithSpinner isLoading={loading} {...props} />
@@ -46,14 +46,13 @@ class shopPage extends React.Component {
             })
           }
         /> */}
-        <Route
-          path={`${match.path}/:collectionId`}
-          component={CollectionCotainer}
-        />
-      </div>
-    );
-  }
-}
+      <Route
+        path={`${match.path}/:collectionId`}
+        component={CollectionCotainer}
+      />
+    </div>
+  );
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
@@ -62,4 +61,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(shopPage);
+)(ShopPage);
